@@ -80,7 +80,9 @@ class EmpresaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,['nombre'=> 'required','descripcion'=> 'required']);
-        Empresas::update($request->all());
+        $input = $request->all();
+        $empresas = Empresas::find($id);
+        $empresas->update($input);
         return redirect()->route('empresas.index');
     }
 

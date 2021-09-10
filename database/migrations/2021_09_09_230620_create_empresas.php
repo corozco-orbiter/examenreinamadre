@@ -17,9 +17,7 @@ class CreateEmpresas extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('descripcion');
-            $table->dateTime('fecha_registro');
-            $table->dateTime('fecha_actualizacion');
-            $table->string('usuario registro');
+        
             $table->timestamps();
         });
     }

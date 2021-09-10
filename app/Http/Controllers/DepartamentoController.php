@@ -81,7 +81,9 @@ class DepartamentoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,['nombre'=> 'required','descripcion'=> 'required']);
-        Departamentos::update($request->all());
+        $input = $request->all();
+        $departamentos= Departamentos::find($id);
+        $departamentos->update($input);
         return redirect()->route('departamentos.index');
     }
 

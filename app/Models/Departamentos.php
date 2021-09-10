@@ -9,4 +9,5 @@ class Departamentos extends Model
 {
     use HasFactory;
     protected $fillable = ['nombre','descripcion'];
+    public $timestamps = false;
 }

@@ -47,7 +47,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['nombre'=> 'required','fecha_nacimiento'=> 'required','correo'=> 'required','genero'=> 'required','telefono'=> 'required','celular'=> 'required','fecha_ingreso'=> 'required']);
+        $this->validate($request,['nombre'=> 'required','fecha_nacimiento'=> 'required','correo'=> 'required','genero'=> 'required','telefono'=> 'required','celular'=> 'required','fecha_ingreso'=> 'required','departamento'=> 'required','empresa'=> 'required']);
         Empleados::create($request->all());
         return redirect()->route('empleados.index');
     }
@@ -73,10 +73,10 @@ class EmpleadoController extends Controller
     {
         $empleado=Empleados::find($id);
         $empresas=Empresas::pluck('nombre','nombre')->all();
-        $empleadoEmpresa=$empleado->empresas->pluck('nombre','nombre')->all();
+        $empleadoEmpresa=Empleados::where('id',$id)->pluck('empresa','empresa');
         $departamentos=Departamentos::pluck('nombre','nombre')->all();
-        $departamentoEmpresa=$empleado->departamentos->pluck('nombre','nombre')->all();
-        return view('usuarios.editar',compact('empleado','empresas','departamentos','empleadoEmpresa','departamentoEmpresa'));
+        $empleadoDepartamento=Empleados::where('id',$id)->pluck('departamento','departamento');
+        return view('empleados.editar',compact('empleado','empresas','departamentos','empleadoEmpresa','empleadoDepartamento'));
     }
 
     /**
@@ -89,7 +89,9 @@ class EmpleadoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,['nombre'=> 'required','fecha_nacimiento'=> 'required','correo'=> 'required','genero'=> 'required','telefono'=> 'required','celular'=> 'required','fecha_ingreso'=> 'required']);
-        Empleados::update($request->all());
+        $input = $request->all();
+        $empleado = Empleados::find($id);
+        $empleado->update($input);
         return redirect()->route('empleados.index');
     }
 

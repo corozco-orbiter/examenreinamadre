@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="card card-primary">
-        <div class="card-header"><h4>Sistema de empleados</h4></div>
+        <div class="card-header"><h4>Sistema de empleados "Reina Madre"</h4></div>
 
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
@@ -62,6 +62,9 @@
                         Ingresar
                     </button>
                 </div>
+                <a href="{{ route('register') }}" class="text-small">
+                                ¿Aun no tienes cuenta? Ingresa aqui
+                            </a>
             </form>
         </div>
     </div>
